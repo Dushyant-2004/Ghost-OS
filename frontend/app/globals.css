@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #08090d; color: #eef0ff; font-family: Arial, sans-serif; }
+button, input { font: inherit; }
+.glass { background: rgba(18, 20, 31, .76); border: 1px solid rgba(148, 163, 184, .14); backdrop-filter: blur(18px); }

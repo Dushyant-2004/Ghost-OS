@@ -1,0 +1,7 @@
+export type TaskStatus = "pending" | "running" | "completed" | "failed";
+export type TaskStep = { id: number; step_name: string; description: string; status: TaskStatus; order_index: number; };
+export type TaskPlanStep = { step_id: string; title: string; description: string; tool_name: string; status: string; dependencies: string[]; expected_result: string; };
+export type TaskPlan = { objective: string; steps: TaskPlanStep[]; required_tools: string[]; dependencies: string[]; expected_outcome: string; verification_criteria: string[]; requires_approval: boolean; provider: string; };
+export type ResearchRecord = { id: string; query: string; source_url: string; source_title: string; extracted_content: string; key_findings: string[]; collected_at: string; status: string; error_message: string | null; verification_status: string; };
+export type Artifact = { id: number; filename: string; file_path: string; content_type: string; created_at: string; };
+export type Task = { id: string; title: string; original_instruction: string; status: TaskStatus; created_at: string; started_at: string | null; completed_at: string | null; error_message: string | null; steps?: TaskStep[]; events?: { id: number; event_type: string; message: string; timestamp: string }[]; plan?: TaskPlan | null; research_records?: ResearchRecord[]; artifacts?: Artifact[]; research_status?: string; verified_findings?: number; unverified_findings?: number; artifact_paths?: string[]; execution_summary?: string | null; };

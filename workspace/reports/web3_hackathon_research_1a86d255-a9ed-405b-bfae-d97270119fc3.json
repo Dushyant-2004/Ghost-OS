@@ -1,0 +1,24 @@
+{
+  "query": "Research Web3 http://127.0.0.1:62485/",
+  "results": [
+    {
+      "query": "Research Web3 http://127.0.0.1:62485/",
+      "source_url": "http://127.0.0.1:62485/",
+      "source_title": "x",
+      "extracted_content": "Web3 hackathon deadline 2026",
+      "key_findings": [
+        "Web3 hackathon deadline 2026."
+      ],
+      "collected_at": "2026-11-09T06:01:50.463042",
+      "status": "collected",
+      "error_message": null
+    }
+  ],
+  "analysis": {
+    "research_count": 1,
+    "evidence_findings": [
+      "Web3 hackathon deadline 2026."
+    ],
+    "analysis_ready": true
+  }
+}

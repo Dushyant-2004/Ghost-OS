@@ -1,0 +1,27 @@
+{
+  "query": "Research this Web3 hackathon and report eligibility, deadlines, and submission requirements: http://127.0.0.1:59777/hackathon",
+  "results": [
+    {
+      "query": "Research this Web3 hackathon and report eligibility, deadlines, and submission requirements: http://127.0.0.1:59777/hackathon",
+      "source_url": "http://127.0.0.1:59777/hackathon",
+      "source_title": "Local Web3 Hackathon",
+      "extracted_content": "Applications close on 2026-12-01. Teams must submit a working demo and repository.",
+      "key_findings": [
+        "Applications close on 2026-12-01",
+        "Teams must submit a working demo and repository"
+      ],
+      "collected_links": [],
+      "collected_at": "2026-11-09T06:11:44.379795",
+      "status": "collected",
+      "error_message": null
+    }
+  ],
+  "analysis": {
+    "research_count": 1,
+    "evidence_findings": [
+      "Applications close on 2026-12-01",
+      "Teams must submit a working demo and repository"
+    ],
+    "analysis_ready": true
+  }
+}
