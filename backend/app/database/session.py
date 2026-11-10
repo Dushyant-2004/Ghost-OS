@@ -27,7 +27,7 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 async def init_db() -> None:
     from app.models import artifact, task  # noqa: F401
     from app.models import plan  # noqa: F401
-    from app.models import browser, vision, research, approval, memory  # noqa: F401
+    from app.models import browser, vision, research, approval, memory, phase4  # noqa: F401
 
     async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.create_all)

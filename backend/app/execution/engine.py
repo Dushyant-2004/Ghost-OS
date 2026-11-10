@@ -6,7 +6,7 @@ from datetime import datetime
 from typing import TypedDict
 
 from langgraph.graph import END, StateGraph
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import Settings
@@ -16,6 +16,7 @@ from app.models.approval import Approval, ApprovalStatus
 from app.models.browser import BrowserSession
 from app.models.research import ResearchRecord
 from app.models.task import ExecutionCheckpoint, RecoveryEvent, Task, TaskEvent, TaskStatus, TaskStep, ToolCall
+from app.models.phase4 import PlanRevision
 from app.browser.manager import BrowserManager
 from app.services.approvals import create_approval
 
@@ -201,6 +202,21 @@ def _build_graph(session: AsyncSession, task: Task, checkpoint: ExecutionCheckpo
             state["analysis"] = result.output
         if not result.success:
             state["last_error"] = result.output.get("message", "Tool failed")
+            if state["retries"] == 0:
+                revision_count = await session.scalar(
+                    select(func.count()).select_from(PlanRevision).where(PlanRevision.task_id == task.id)
+                )
+                if (revision_count or 0) < settings.max_replans:
+                    session.add(PlanRevision(
+                        task_id=task.id,
+                        version=(revision_count or 0) + 1,
+                        reason=f"{tool_name} reported a recoverable condition: {state['last_error']}",
+                        affected_step=step.step_name,
+                    ))
+                    task.events.append(TaskEvent(
+                        event_type="plan.revised",
+                        message=f"Replanned affected step '{step.step_name}' without repeating completed steps.",
+                    ))
             if state["retries"] >= settings.max_retries:
                 raise ExecutionError(state["last_error"], result.error_category or "tool_error")
             return state

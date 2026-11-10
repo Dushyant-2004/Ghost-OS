@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     app_name: str = "GhostOS API"
     app_env: str = "development"
     database_url: str = "sqlite:///./ghostos.db"
-    frontend_origins: str = "http://localhost:3000"
+    frontend_origins: str = "http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://localhost:3002,http://127.0.0.1:3002"
     llm_provider: str = "demo"
     llm_model: str | None = None
     openai_api_key: str | None = None
@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     browser_content_timeout_ms: int = 5_000
     desktop_automation_enabled: bool = False
     desktop_max_actions: int = 20
+    max_replans: int = 3
+    max_concurrent_tasks: int = 2
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 

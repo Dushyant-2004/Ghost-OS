@@ -4,7 +4,7 @@
 Research collected 1 source record(s) and 2 evidence-backed finding(s).
 
 ## Researched hackathons and official sources
-- [Local Web3 Hackathon](http://127.0.0.1:62621/hackathon)
+- [Local Web3 Hackathon](http://127.0.0.1:53163/hackathon)
 
 ## Eligibility, deadlines, and submission requirements
 Only information present in the collected source evidence is reported below; unavailable details remain unverified.

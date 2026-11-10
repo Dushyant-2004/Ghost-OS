@@ -22,6 +22,8 @@ export const api = {
   approvals: () => request<Approval[]>("/api/approvals"),
   memories: (query = "") => request<Memory[]>(`/api/memories${query ? `?query=${encodeURIComponent(query)}` : ""}`),
   deleteMemory: (id: string) => request<void>(`/api/memories/${id}`, { method: "DELETE" }),
+  analytics: () => request<{ total_tasks: number; completed_tasks: number; failed_tasks: number; success_rate: number | null }>("/api/analytics"),
+  orchestration: () => request<{ tasks: { id: string; title: string; status: string; priority: number }[]; dependencies: { task_id: string; depends_on_task_id: string }[] }>("/api/orchestration"),
 };
 
 export type TaskEvent = { id: number; task_id: string; event_type: string; message: string; timestamp: string };

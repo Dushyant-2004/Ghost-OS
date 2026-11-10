@@ -11,6 +11,8 @@ from app.api.events import router as events_router
 from app.api.artifacts import router as artifacts_router
 from app.api.desktop import router as desktop_router
 from app.api.memory import router as memory_router
+from app.api.phase4 import router as phase4_router
+from app.services.scheduler import GhostScheduler
 from app.core.config import get_settings
 from app.database.session import init_db
 from app.schemas.task import HealthResponse
@@ -19,7 +21,10 @@ from app.schemas.task import HealthResponse
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     await init_db()
+    scheduler = GhostScheduler()
+    scheduler.start()
     yield
+    await scheduler.shutdown()
 
 
 settings = get_settings()
@@ -39,6 +44,7 @@ app.include_router(events_router)
 app.include_router(artifacts_router)
 app.include_router(desktop_router)
 app.include_router(memory_router)
+app.include_router(phase4_router)
 
 
 @app.get("/api/health", response_model=HealthResponse)
