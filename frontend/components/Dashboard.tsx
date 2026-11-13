@@ -5,7 +5,8 @@ import { api } from "../lib/api";
 import type { Task } from "../types";
 import type { Memory } from "../lib/api";
 
-function StatusIcon({ status }: { status: string }) {
+function StatusIcon({ status }: { status: string })
+ {
   if (status === "completed") return <CheckCircle2 className="text-emerald-400" size={16} />;
   if (status === "running") return <Loader2 className="animate-spin text-cyan-300" size={16} />;
   if (status === "failed") return <XCircle className="text-rose-400" size={16} />;
@@ -43,7 +44,8 @@ export function Dashboard() {
     if (!taskId) return;
     let active = true;
     const poll = async () => {
-      try {
+      try 
+      {
         const events = await api.events(taskId);
         if (active) setLiveEvents(events);
       } catch {
