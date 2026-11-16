@@ -40,6 +40,33 @@ The frontend runs at `http://localhost:3000`.
 For a complete Windows setup, run `.\setup_windows.ps1`. To run the backend
 tests and frontend checks together, run `.\run_checks.ps1`.
 
+## Project layout
+
+```text
+backend/
+  app/          FastAPI application, task execution, tools, and services
+  tests/        Backend API and workflow tests
+frontend/
+  app/          Next.js routes and layout
+  components/   Dashboard and navigation UI
+  lib/          Frontend API client
+```
+
+The frontend reads `NEXT_PUBLIC_API_URL` at build time and defaults to
+`http://localhost:8000`. When using a different backend host or port, export
+that variable before starting the frontend:
+
+```powershell
+$env:NEXT_PUBLIC_API_URL = "http://localhost:8000"
+npm run dev
+```
+
+Check that the backend is available before opening the dashboard:
+
+```powershell
+Invoke-RestMethod http://localhost:8000/api/health
+```
+
 ## Configuration
 
 Copy `.env.example` to `.env` at the repository root, or configure the
